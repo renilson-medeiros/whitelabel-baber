@@ -1,0 +1,61 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/app/_components/ui/button";
+import { Input } from "@/app/_components/ui/input";
+
+export default function AdminLoginPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async () => {
+    setError("");
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        console.log("Login realizado com sucesso. Redirecionando para /admin/panel...");
+        router.push("/admin/panel");
+      } else {
+        setError(data.message || "Erro ao logar");
+      }
+    } catch (err) {
+      setError("Erro na requisição");
+    }
+  };
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+      <div className="flex flex-col gap-4 w-full max-w-sm p-6 bg-white rounded-xl shadow">
+        <h1 className="text-2xl font-bold mb-4">Login admin</h1>
+
+        <div className="flex flex-col">
+          <Input
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="mb-2 border-border rounded-full py-5"
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mb-2 border-border rounded-full py-5"
+          />
+        </div>
+
+        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+        <Button onClick={handleLogin} className="w-full rounded-full">Login</Button>
+      </div>
+    </div>
+  );
+}
