@@ -8,8 +8,12 @@ import { Separator } from "@/app/_components/ui/separator";
 import { ServiceItem } from "@/app/_components/service-item";
 import { PhoneItem } from "@/app/_components/phone-item";
 
-const BarbershopPage = async (props: PageProps<"/barbershops/[id]">) => {
-  const { id } = await props.params;
+const BarbershopPage = async ({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) => {
+  const { id } = await params;
   const barbershop = await prisma.barbershop.findUnique({
     where: {
       id,

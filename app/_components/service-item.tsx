@@ -69,28 +69,28 @@ export function ServiceItem({ service }: ServiceItemProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const handleConfirm = async () => {
-    if (!selectedTime || !selectedDate) return;
+  // const handleConfirm = async () => {
+  //   if (!selectedTime || !selectedDate) return;
 
-    const [hours, minutes] = selectedTime.split(":");
-    const date = new Date(selectedDate);
-    date.setHours(Number(hours), Number(minutes));
+  //   const [hours, minutes] = selectedTime.split(":");
+  //   const date = new Date(selectedDate);
+  //   date.setHours(Number(hours), Number(minutes));
 
-    const bookingResult = await executeAsync({
-      serviceId: service.id,
-      date,
-    });
+  //   const bookingResult = await executeAsync({
+  //     serviceId: service.id,
+  //     date,
+  //   });
 
-    if (bookingResult.serverError || bookingResult.validationErrors) {
-      toast.error(bookingResult.validationErrors?._errors?.[0]);
-      return;
-    }
+  //   if (bookingResult.serverError || bookingResult.validationErrors) {
+  //     toast.error(bookingResult.validationErrors?._errors?.[0]);
+  //     return;
+  //   }
 
-    toast.success("Reserva realizada com sucesso!");
-    setSheetIsOpen(false);
+  //   toast.success("Reserva realizada com sucesso!");
+  //   setSheetIsOpen(false);
 
-    router.push("/bookings");
-  };
+  //   router.push("/bookings");
+  // };
 
   return (
     <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>

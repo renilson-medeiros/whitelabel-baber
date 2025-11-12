@@ -2,10 +2,12 @@
 
 import { ServiceItem } from "./service-item";
 import { Separator } from "./ui/separator";
-import type { Prisma } from "@prisma/client";
+import type { Barbershop, BarbershopService } from "../../generated/prisma";
 
 interface BarbershopServicesProps {
-  barbershop: Prisma.BarbershopGetPayload<{ include: { services: true } }>;
+  barbershop: Barbershop & { 
+    services: BarbershopService[] 
+  };
 }
 
 export function BarbershopServices({ barbershop }: BarbershopServicesProps) {
@@ -24,7 +26,10 @@ export function BarbershopServices({ barbershop }: BarbershopServicesProps) {
 
         <div className="flex w-full flex-col gap-3">
           {barbershop.services.map((service) => (
-            <ServiceItem key={service.id} service={service} />
+            <ServiceItem 
+              key={service.id} 
+              service={{ ...service, barbershop }} 
+            />
           ))}
         </div>
       </div>

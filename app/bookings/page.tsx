@@ -11,7 +11,6 @@ import {
   PageSectionTitle,
 } from "../_components/ui/page";
 import BookingItem from "../_components/booking-item";
-import { Badge } from "../_components/ui/badge";
 
 const BookingsPage = async () => {
   const session = await auth.api.getSession({
@@ -45,16 +44,6 @@ const BookingsPage = async () => {
 
   const cancelledBookings = bookings.filter((booking) => booking.cancelled);
 
-  const renderBadge = (booking: typeof bookings[0]) => {
-    if (booking.finished) {
-      return <Badge className="bg-blue-100 text-blue-600 uppercase">Finalizado</Badge>;
-    }
-    if (booking.cancelled) {
-      return <Badge className="bg-red-100 text-red-600 uppercase">Cancelado</Badge>;
-    }
-    return <Badge className="bg-green-100 text-green-600 uppercase">Confirmado</Badge>;
-  };
-
   return (
     <main className="flex h-screen min-h-screen flex-col">
       <Header />
@@ -70,7 +59,6 @@ const BookingsPage = async () => {
                   <BookingItem
                     key={booking.id}
                     booking={booking}
-                    badge={renderBadge(booking)}
                   />
                 ))}
               </div>
@@ -86,7 +74,6 @@ const BookingsPage = async () => {
                     <BookingItem
                       key={booking.id}
                       booking={booking}
-                      badge={renderBadge(booking)}
                     />
                   ))}
                 </PageSectionScroller>
@@ -103,7 +90,6 @@ const BookingsPage = async () => {
                     <BookingItem
                       key={booking.id}
                       booking={booking}
-                      badge={renderBadge(booking)}
                     />
                   ))}
                 </PageSectionScroller>
