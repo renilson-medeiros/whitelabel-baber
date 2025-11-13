@@ -264,7 +264,7 @@ export default function AdminServicesPage() {
 
             <SheetFooter>
               <Button
-                className="w-full cursor-pointer"
+                className="w-full rounded-full cursor-pointer"
                 onClick={() => handleSave({ ...form })}
               >
                 Salvar

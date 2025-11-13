@@ -46,8 +46,33 @@ export function ServiceItem({ service }: ServiceItemProps) {
     enabled: Boolean(selectedDate),
   });
 
+  // Filtra horários se for o dia de hoje
+  const filteredTimeSlots = (() => {
+    if (!availableTimeSlots?.data || !selectedDate) return [];
+
+    const now = new Date();
+    const isToday = 
+      selectedDate.getDate() === now.getDate() &&
+      selectedDate.getMonth() === now.getMonth() &&
+      selectedDate.getFullYear() === now.getFullYear();
+
+    if (!isToday) {
+      return availableTimeSlots.data;
+    }
+
+    // Filtra apenas horários futuros para hoje
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+
+    return availableTimeSlots.data.filter((time) => {
+      const [hour, minute] = time.split(':').map(Number);
+      return hour > currentHour || (hour === currentHour && minute > currentMinute);
+    });
+  })();
+
   const handleDateSelect = (date: Date | undefined) => {
     setSelectedDate(date);
+    setSelectedTime(undefined); // Limpa horário selecionado ao mudar data
   };
 
   const priceInReais = (service.priceInCents / 100).toLocaleString("pt-BR", {
@@ -68,29 +93,6 @@ export function ServiceItem({ service }: ServiceItemProps) {
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
-  // const handleConfirm = async () => {
-  //   if (!selectedTime || !selectedDate) return;
-
-  //   const [hours, minutes] = selectedTime.split(":");
-  //   const date = new Date(selectedDate);
-  //   date.setHours(Number(hours), Number(minutes));
-
-  //   const bookingResult = await executeAsync({
-  //     serviceId: service.id,
-  //     date,
-  //   });
-
-  //   if (bookingResult.serverError || bookingResult.validationErrors) {
-  //     toast.error(bookingResult.validationErrors?._errors?.[0]);
-  //     return;
-  //   }
-
-  //   toast.success("Reserva realizada com sucesso!");
-  //   setSheetIsOpen(false);
-
-  //   router.push("/bookings");
-  // };
 
   return (
     <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
@@ -151,16 +153,22 @@ export function ServiceItem({ service }: ServiceItemProps) {
               <Separator />
 
               <div className="flex items-center gap-3 overflow-x-auto px-5 py-6 [&::-webkit-scrollbar]:hidden md:flex-wrap">
-                {availableTimeSlots?.data?.map((time) => (
-                  <Button
-                    key={time}
-                    variant={selectedTime === time ? "default" : "outline"}
-                    className="shrink-0 rounded-full cursor-pointer"
-                    onClick={() => setSelectedTime(time)}
-                  >
-                    {time}
-                  </Button>
-                ))}
+                {filteredTimeSlots.length > 0 ? (
+                  filteredTimeSlots.map((time) => (
+                    <Button
+                      key={time}
+                      variant={selectedTime === time ? "default" : "outline"}
+                      className="shrink-0 rounded-full cursor-pointer"
+                      onClick={() => setSelectedTime(time)}
+                    >
+                      {time}
+                    </Button>
+                  ))
+                ) : (
+                  <p className="w-full text-muted-foreground text-center text-sm">
+                    Não há horários disponíveis para hoje.
+                  </p>
+                )}
               </div>
 
               <Separator />

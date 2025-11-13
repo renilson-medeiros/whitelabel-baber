@@ -54,13 +54,13 @@ const SidebarMenu = () => {
   };
 
   return (
-    <div className="flex h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden flex-col gap-6 py-6">
+    <div className="flex h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden flex-col gap-6 py-2">
 
       {/* User Section */}
-      <div className="px-5">
+      <div className="px-2">
         {session?.user ? (
-          <div className="flex items-center gap-3">
-            <Avatar className="size-12 cursor-pointer">
+          <div className="flex items-center gap-3 p-3 rounded-2xl bg-card border border-border">
+            <Avatar className="size-12 cursor- rounded-xl">
               <AvatarImage src={session.user.image ?? ""} />
               <AvatarFallback>
                 {session.user.name?.charAt(0).toUpperCase()}

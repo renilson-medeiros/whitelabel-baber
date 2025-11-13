@@ -73,30 +73,29 @@ const Home = async () => {
         />
 
         {/* Agendamentos confirmados */}
-        <div className="flex w-full flex-col items-start gap-3 mt-8">
-          <div className="flex items-center justify-center gap-2.5">
-            <p className="text-foreground text-xs font-bold uppercase">
-              AGENDAMENTOS CONFIRMADOS
-            </p>
-          </div>
-
-          <div className="flex w-full flex-col gap-3">
-            {confirmedBookings.length > 0 && (
+        {confirmedBookings.length > 0 && (
+          <div className="flex w-full flex-col items-start gap-3">
+            <div className="flex w-full flex-col gap-3">
               <PageSection>
-                <div className="space-y-3">
-                  <PageSectionScroller>
-                    {confirmedBookings.map((booking) => (
-                      <BookingItem key={booking.id} booking={booking} />
-                    ))}
-                  </PageSectionScroller>
+                <div className="flex flex-col gap-3">
+                  <p className="text-foreground text-xs font-bold uppercase">
+                    AGENDAMENTOS CONFIRMADOS
+                  </p>
+                  <div className="space-y-3">
+                    <PageSectionScroller>
+                      {confirmedBookings.map((booking) => (
+                        <BookingItem key={booking.id} booking={booking} />
+                      ))}
+                    </PageSectionScroller>
+                  </div>
                 </div>
               </PageSection>
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Serviços */}
-        <div className="flex w-full flex-col items-start gap-3 mt-8">
+        <div className="flex w-full flex-col items-start gap-3">
           <div className="flex items-center justify-center gap-2.5">
             <p className="text-foreground text-xs font-bold uppercase">
               SERVIÇOS OFERECIDOS
