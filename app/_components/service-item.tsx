@@ -17,10 +17,10 @@ import { useRouter } from "next/navigation";
 import { ptBR } from "date-fns/locale";
 import { useAction } from "next-safe-action/hooks";
 import { createBooking } from "../_actions/create-booking";
-import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { getDateAvailableTimeSlots } from "../_actions/get-date-available-time-slots";
 import ClientInfoModal from "./client-info-modal";
+import { toast } from "sonner";
 
 interface ServiceItemProps {
   service: BarbershopService & {
@@ -216,23 +216,32 @@ export function ServiceItem({ service }: ServiceItemProps) {
           )}
         </div>
         <ClientInfoModal
-            open={clientModalOpen}
-            onClose={() => setClientModalOpen(false)}
-            onConfirm={async (name, phone) => {
-              const [hours, minutes] = selectedTime!.split(":");
-              const date = new Date(selectedDate!);
-              date.setHours(Number(hours), Number(minutes));
+          open={clientModalOpen}
+          onClose={() => setClientModalOpen(false)}
+          onConfirm={async (name, phone) => {
+            const [hours, minutes] = selectedTime!.split(":");
+            const date = new Date(selectedDate!);
+            date.setHours(Number(hours), Number(minutes));
 
-              await executeAsync({
-                serviceId: service.id,
-                date,
-                clientName: name,
-                clientPhone: phone,
-              });
+            const result = await executeAsync({
+              serviceId: service.id,
+              date,
+              clientName: name,
+              clientPhone: phone,
+            });
 
+            if (!result?.serverError && !result?.validationErrors) {
+              toast.success(`Agendamento para ${service.name} realizado!`);
+              
+              setClientModalOpen(false);
+              setSheetIsOpen(false);
+              
               router.push("/bookings");
-            }}
-          />
+            } else {
+              toast.error("Erro ao criar agendamento");
+            }
+          }}
+        />
 
       </SheetContent>
     </Sheet>

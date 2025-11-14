@@ -74,7 +74,7 @@ const SidebarMenu = () => {
           </div>
         ) : (
           <div className="flex gap-14 items-center justify-between">
-            <p className="text-base font-semibold">Olá. Faça seu login!</p>
+            <p className="text-base font-semibold px-3">Olá. Faça seu login!</p>
 
             <Button
               onClick={handleLogin}

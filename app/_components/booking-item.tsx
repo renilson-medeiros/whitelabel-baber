@@ -64,20 +64,18 @@ const getStatus = (booking: Pick<Booking, "date" | "cancelled" | "finished">) =>
 const BookingItem = ({ booking }: BookingItemProps) => {
   const [sheetIsOpen, setSheetIsOpen] = useState(false);
 
-  const { execute: executeCancelBooking } = useAction(cancelBooking, {
-    onSuccess: () => {
+  const { executeAsync: executeCancelBooking, isPending } = useAction(cancelBooking);
+
+  const handleCancelBooking = async () => {
+    
+    const result = await executeCancelBooking({ bookingId: booking.id });
+    
+    if (result?.data) {
       toast.success("Reserva cancelada com sucesso!");
       setSheetIsOpen(false);
-    },
-    onError: ({ error }) => {
-      toast.error(
-        error.serverError || "Erro ao cancelar reserva. Tente novamente.",
-      );
-    },
-  });
-
-  const handleCancelBooking = () => {
-    executeCancelBooking({ bookingId: booking.id });
+    } else if (result?.serverError || result?.validationErrors) {
+      toast.error("Erro ao cancelar reserva. Tente novamente.");
+    }
   };
 
   const status = getStatus(booking);
@@ -242,6 +240,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                   Cancelar Reserva
                 </Button>
               </AlertDialogTrigger>
+
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Cancelar reserva</AlertDialogTitle>
@@ -258,9 +257,10 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                   </AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleCancelBooking}
+                    disabled={isPending}
                     className="bg-destructive text-destructive-foreground hover:bg-destructive/90 cursor-pointer rounded-full border-destructive"
                   >
-                    Confirmar
+                    {isPending ? "Cancelando..." : "Confirmar"}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
