@@ -40,9 +40,11 @@ const BookingsPage = async () => {
     (booking) => !booking.cancelled && !booking.finished && new Date(booking.date) >= now,
   );
 
-  const finishedBookings = bookings.filter((booking) => booking.finished);
+  const finishedBookings = bookings
+    .filter((booking) => booking.finished).slice(0, 5);
 
-  const cancelledBookings = bookings.filter((booking) => booking.cancelled);
+  const cancelledBookings = bookings
+    .filter((booking) => booking.cancelled).slice(0, 5);
 
   return (
     <main className="flex h-screen min-h-screen flex-col">

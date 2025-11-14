@@ -11,8 +11,8 @@ const jakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Anderson Cabeleireiro",
-  description: "Anderson Cabeleireiro",
+  title: "Barber Cabeleireiro",
+  description: "Barber Cabeleireiro",
 };
 
 export default function RootLayout({

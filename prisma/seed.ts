@@ -7,10 +7,10 @@ async function seedDatabase() {
     // Dados da barbearia
     const barbershop = await prisma.barbershop.create({
       data: {
-        name: "Anderson Cabeleireiro",
-        address: "R. Alm. Alexandrino, 862 - Parque da Fonte, São José dos Pinhais - PR, 83040-420",
+        name: "Barbearia Estilo Moderno",
+        address: "Av. Pres. Kennedy, 456 - Industrial, Contagem - MG, 32015-789",
         imageUrl: "https://utfs.io/f/c97a2dc9-cf62-468b-a851-bfd2bdde775f-16p.png",
-        phones: ["(41) 99768-8606"],
+        phones: ["(41) 99999-8888"],
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac augue ullamcorper, pharetra orci mollis, auctor tellus. Phasellus pharetra erat ac libero efficitur tempus. Donec pretium convallis iaculis. Etiam eu felis sollicitudin, cursus mi vitae, iaculis magna. Nam non erat neque. In hac habitasse platea dictumst. Pellentesque molestie accumsan tellus id laoreet.",
       },
