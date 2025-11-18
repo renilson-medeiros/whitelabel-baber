@@ -23,6 +23,7 @@ const SearchInput = () => {
         placeholder="Pesquisar por serviços..."
         className="border-border rounded-full py-5"
         value={search}
+        required
         onChange={(e) => setSearch(e.target.value)}
       />
       <Button

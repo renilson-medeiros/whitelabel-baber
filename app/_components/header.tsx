@@ -18,7 +18,7 @@ const Header = () => {
     <header className="flex items-center justify-between px-5 pt-6">
 
       <Link href="/">
-        <Image src="/logo.svg" alt="Aparatus" width={219} height={30} />
+        <Image src="/logo.svg" alt="Barber" width={219} height={30} />
       </Link>
       
       <div className="flex items-center gap-2">

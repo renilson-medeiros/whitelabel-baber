@@ -17,7 +17,7 @@ import { SheetClose } from "./ui/sheet";
 const CATEGORY_LINKS = [
   { label: "Cabelo", search: "cabelo" },
   { label: "Barba", search: "barba"},
-  { label: "Cabelo & Barba", search: "cabelo e barba" },
+  { label: "Cabelo & Barba", search: "cabelo & barba" },
   { label: "Acabamento", search: "acabamento"},
   { label: "Sobrancelha", search: "sobrancelha"},
   { label: "Hidratação", search: "hidratação"},
@@ -27,7 +27,7 @@ const CATEGORY_LINKS = [
 ];
 
 const CategoryItem = ({ label, search }: { label: string; search: string }) => (
-  <Link href={`/barbershops?search=${search}`} className="cursor-pointer">
+  <Link href={`/services?search=${search}`} className="cursor-pointer">
     <Button
       variant="ghost"
       className="
