@@ -41,6 +41,7 @@ export default function AdminLoginPage() {
           <Input
             placeholder="Username"
             value={username}
+            required
             onChange={(e) => setUsername(e.target.value)}
             className="mb-2 border-border rounded-full py-5"
           />
@@ -48,13 +49,14 @@ export default function AdminLoginPage() {
             type="password"
             placeholder="Password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
             className="mb-2 border-border rounded-full py-5"
           />
         </div>
 
         {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-        <Button onClick={handleLogin} className="w-full rounded-full">Login</Button>
+        <Button onClick={handleLogin} className="w-full rounded-full cursor-pointer">Login</Button>
       </div>
     </div>
   );

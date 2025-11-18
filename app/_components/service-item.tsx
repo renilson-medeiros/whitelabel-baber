@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { BarbershopService, Barbershop } from "@/generated/prisma/client";
+import { isHoliday } from "@/lib/holidays";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -142,7 +143,17 @@ export function ServiceItem({ service }: ServiceItemProps) {
               mode="single"
               selected={selectedDate}
               onSelect={handleDateSelect}
-              disabled={{ before: today }}
+              disabled={(date) => {
+                if (date < today) return true;
+
+                // Desabilita domingos
+                if (date.getDay() === 0) return true;
+                
+                // Desabilita feriados
+                if (isHoliday(date)) return true;
+
+                return false;
+              }}
               className="w-full p-0"
               locale={ptBR}
             />
@@ -166,7 +177,7 @@ export function ServiceItem({ service }: ServiceItemProps) {
                   ))
                 ) : (
                   <p className="w-full text-muted-foreground text-center text-sm">
-                    Não há horários disponíveis para hoje.
+                    Não há mais horários disponíveis.
                   </p>
                 )}
               </div>
