@@ -209,9 +209,19 @@ export default function AdminServicesPage() {
               <div className="flex items-baseline-last flex-1 md:items-center-safe justify-between w-full">
                 <h1 className="text-2xl font-bold">Serviços</h1>
 
-                <Link href="/admin/panel">
-                  <p className="text-sm text-muted-foreground hover:underline">Acessar Agendamentos</p>
-                </Link>
+                <div className="flex gap-4">
+                  <Link href="/admin/panel">
+                    <p className="text-sm text-muted-foreground hover:underline">
+                      Agendamentos
+                    </p>
+                  </Link>
+
+                  <Link href="/admin/dashboard">
+                    <p className="text-sm text-muted-foreground hover:underline">
+                      Dashboard
+                    </p>
+                  </Link>
+                </div>
               </div>
 
               <Button
