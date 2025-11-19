@@ -22,6 +22,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getDateAvailableTimeSlots } from "../_actions/get-date-available-time-slots";
 import ClientInfoModal from "./client-info-modal";
 import { toast } from "sonner";
+import { startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
 
 interface ServiceItemProps {
   service: BarbershopService & {
@@ -95,6 +96,16 @@ export function ServiceItem({ service }: ServiceItemProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  const hasHolidays = (() => {
+    if (!selectedDate) return false;
+    
+    const start = startOfMonth(selectedDate);
+    const end = endOfMonth(selectedDate);
+    const daysInMonth = eachDayOfInterval({ start, end });
+    
+    return daysInMonth.some(day => isHoliday(day));
+  })();
+
   return (
     <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
       <div className="border-border bg-card flex items-center justify-center gap-3 rounded-2xl border border-solid p-3">
@@ -145,18 +156,25 @@ export function ServiceItem({ service }: ServiceItemProps) {
               onSelect={handleDateSelect}
               disabled={(date) => {
                 if (date < today) return true;
-
-                // Desabilita domingos
                 if (date.getDay() === 0) return true;
-                
-                // Desabilita feriados
                 if (isHoliday(date)) return true;
-
                 return false;
+              }}
+              modifiers={{
+                holiday: (date) => isHoliday(date) && date >= today,
+              }}
+              modifiersClassNames={{
+                holiday: "text-red-600 opacity-100",
               }}
               className="w-full p-0"
               locale={ptBR}
             />
+            
+            {hasHolidays && (
+              <p className="text-xs text-muted-foreground text-left">
+                <span className="text-red-500">Não atendemos em feriados</span>
+              </p>
+            )}
           </div>
 
           {selectedDate && (
@@ -177,7 +195,7 @@ export function ServiceItem({ service }: ServiceItemProps) {
                   ))
                 ) : (
                   <p className="w-full text-muted-foreground text-center text-sm">
-                    Não há mais horários disponíveis.
+                    Todos os horários já foram reservados.
                   </p>
                 )}
               </div>
