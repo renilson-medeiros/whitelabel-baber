@@ -128,7 +128,7 @@ export default function AdminServicesPage() {
           throw new Error("Falha no upload da imagem");
         }
         imageUrl = uploadResult[0].url;
-        console.log("✅ URL da imagem:", imageUrl);
+        
         toast.success("Imagem enviada com sucesso!");
       }
 
@@ -203,7 +203,7 @@ export default function AdminServicesPage() {
     <main className="flex h-screen min-h-screen flex-col">
       <div className="flex-1">
         <PageContainer>
-          <div className="space-y-6 py-6">
+          <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h1 className="text-2xl font-bold">Serviços</h1>
 

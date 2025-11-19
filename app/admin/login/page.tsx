@@ -22,7 +22,6 @@ export default function AdminLoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        console.log("Login realizado com sucesso. Redirecionando para /admin/panel...");
         router.push("/admin/panel");
       } else {
         setError(data.message || "Erro ao logar");
