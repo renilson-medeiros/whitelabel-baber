@@ -15,9 +15,9 @@ import { Separator } from "./ui/separator";
 import { SheetClose } from "./ui/sheet";
 
 const CATEGORY_LINKS = [
-  { label: "Cabelo", search: "cabelo" },
+  { label: "Corte", search: "corte" },
   { label: "Barba", search: "barba"},
-  { label: "Cabelo & Barba", search: "cabelo & barba" },
+  { label: "Corte & Barba", search: "corte & barba" },
   { label: "Acabamento", search: "acabamento"},
   { label: "Sobrancelha", search: "sobrancelha"},
   { label: "Hidratação", search: "hidratação"},

@@ -3,9 +3,9 @@ import Link from "next/link";
 import { PageSectionScroller } from "./ui/page";
 
 const QUICK_SEARCH_LINKS = [
-  { label: "Cabelo", search: "cabelo", icon: Scissors },
+  { label: "Corte", search: "corte", icon: Scissors },
   { label: "Barba", search: "barba", icon: User },
-  { label: "Cabelo & Barba", search: "cabelo & barba", icon: Scissors },
+  { label: "Corte & Barba", search: "corte & barba", icon: Scissors },
   { label: "Acabamento", search: "acabamento", icon: Sparkles },
   { label: "Sobrancelha", search: "sobrancelha", icon: Eye },
   { label: "Hidratação", search: "hidratação", icon: Waves },

@@ -19,7 +19,7 @@ async function seedDatabase() {
     // Serviços da barbearia
     const services = [
       {
-        name: "Corte de Cabelo",
+        name: "Corte",
         description: "Estilo personalizado com as últimas tendências.",
         price: 60.0,
         imageUrl:

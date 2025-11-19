@@ -17,6 +17,8 @@ import { AddressItem } from "./_components/adress-item";
 import SearchInput from "./_components/search-input";
 import QuickSearchButtons from "./_components/quick-search-buttons";
 import BookingItem from "./_components/booking-item";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 const Home = async () => {
   const barbershop = await prisma.barbershop.findFirst({
@@ -45,8 +47,7 @@ const Home = async () => {
   const now = new Date();
   
   const confirmedBookings = bookings.filter(
-    (booking) => !booking.cancelled && !booking.finished && new Date(booking.date) >= now,
-  );
+    (booking) => !booking.cancelled && !booking.finished && new Date(booking.date) >= now,).slice(0, 5);
 
   return (
     <main>
@@ -75,19 +76,33 @@ const Home = async () => {
         {/* Agendamentos confirmados */}
         {confirmedBookings.length > 0 && (
           <div className="flex w-full flex-col items-start gap-3">
-            <div className="flex w-full flex-col gap-3">
+            <div className="flex w-full flex-col gap-3 ">
               <PageSection>
-                <div className="flex flex-col gap-3">
-                  <p className="text-foreground text-xs font-bold uppercase">
-                    AGENDAMENTOS CONFIRMADOS
-                  </p>
+                <div className="flex flex-col gap-3 overflow-x-hidden">
+
+                  <div className="flex justify-between">
+                    <h2 className="text-foreground text-xs font-bold uppercase">
+                      AGENDAMENTOS CONFIRMADOS
+                    </h2>
+
+                    <Link 
+                      href="/bookings"
+                      className="flex gap-2 text-muted-foreground hover:underline text-xs font-bold uppercase">
+                      Ver todos
+                      <ArrowUpRight size={14} />
+                    </Link>
+                  </div>
+
                   <div className="space-y-3">
                     <PageSectionScroller>
-                      {confirmedBookings.map((booking) => (
-                        <BookingItem key={booking.id} booking={booking} />
-                      ))}
+                      <div className="flex gap-4 w-full md:max-w-[400px]">
+                        {confirmedBookings.map((booking) => (
+                          <BookingItem key={booking.id} booking={booking} />
+                        ))}
+                      </div>
                     </PageSectionScroller>
                   </div>
+
                 </div>
               </PageSection>
             </div>
