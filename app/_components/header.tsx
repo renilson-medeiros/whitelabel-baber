@@ -15,7 +15,7 @@ import Link from "next/link"
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between px-5 pt-6">
+    <header className="flex items-center justify-between px-5 pt-6 container mx-auto">
 
       <Link href="/">
         <Image src="/logo.svg" alt="Barber" width={219} height={30} />

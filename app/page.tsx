@@ -59,23 +59,25 @@ const Home = async () => {
 
         <QuickSearchButtons />
 
-        {/* Imagens do banner */}
-        <Image
-          src={banner}
-          alt="Agende agora!"
-          sizes="100vw"
-          className="block h-auto w-full md:hidden"
-        />
-        <Image
-          src={bannerxl}
-          alt="Agende agora!"
-          sizes="100vw"
-          className="hidden md:block w-full h-auto"
-        />
+        <div className="container mx-auto">
+          {/* Imagens do banner */}
+          <Image
+            src={banner}
+            alt="Agende agora!"
+            sizes="100vw"
+            className="block h-auto w-full md:hidden"
+          />
+          <Image
+            src={bannerxl}
+            alt="Agende agora!"
+            sizes="100vw"
+            className="hidden md:block w-full h-auto"
+          />
+        </div>
 
         {/* Agendamentos confirmados */}
         {confirmedBookings.length > 0 && (
-          <div className="flex w-full flex-col items-start gap-3">
+          <div className="flex w-full flex-col items-start gap-3 container mx-auto">
             <div className="flex w-full flex-col gap-3 ">
               <PageSection>
                 <div className="flex flex-col gap-3 overflow-x-hidden">
@@ -117,7 +119,7 @@ const Home = async () => {
             </p>
           </div>
 
-          <div className="flex w-full flex-col gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
             {barbershop.services.map((service) => (
               <ServiceItem
                 key={service.id}
@@ -128,7 +130,7 @@ const Home = async () => {
         </div>
 
         {/* Contato */}
-        <div className="flex w-full flex-col items-start gap-3 mt-8 mb-5">
+        <div className="flex w-full flex-col items-start gap-3 mt-8 mb-5 container mx-auto">
           <div className="flex items-center justify-center gap-2.5">
             <p className="text-foreground text-xs font-bold uppercase">
               CONTATO

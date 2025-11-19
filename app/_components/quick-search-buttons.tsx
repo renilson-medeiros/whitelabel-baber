@@ -17,7 +17,8 @@ const QUICK_SEARCH_LINKS = [
 const QuickSearchButtons = () => {
   return (
     <PageSectionScroller>
-      {QUICK_SEARCH_LINKS.map(({ label, search, icon: Icon }) => (
+      <div className="flex gap-2 container mx-auto">
+        {QUICK_SEARCH_LINKS.map(({ label, search, icon: Icon }) => (
         <Link
           key={search}
           href={`/services?search=${search}`}
@@ -32,6 +33,7 @@ const QuickSearchButtons = () => {
           <span>{label}</span>
         </Link>
       ))}
+      </div>
     </PageSectionScroller>
   );
 };

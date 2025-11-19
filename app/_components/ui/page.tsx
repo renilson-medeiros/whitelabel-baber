@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export const PageContainer = ({ children }: { children: React.ReactNode }) => {
-  return <div className="space-y-6 p-5 flex-1">{children}</div>;
+  return <div className="space-y-6 p-5 flex-1 container mx-auto">{children}</div>;
 };
 
 export const PageSectionTitle = ({ children }: { children: string }) => {

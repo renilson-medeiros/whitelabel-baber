@@ -24,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${jakartaSans.variable} antialiased bg-white`}
+        
       >
         <QueryProvider>
           {children}
