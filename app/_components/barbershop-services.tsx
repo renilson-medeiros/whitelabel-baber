@@ -5,12 +5,12 @@ import { Separator } from "./ui/separator";
 import type { Barbershop, BarbershopService } from "../../generated/prisma";
 
 interface BarbershopServicesProps {
-  barbershop: Barbershop & { 
-    services: BarbershopService[] 
-  };
+  barbershop: Barbershop & { services: BarbershopService[] };
+  logged: boolean;
+  userName: string;
 }
 
-export function BarbershopServices({ barbershop }: BarbershopServicesProps) {
+export function BarbershopServices({ barbershop, logged, userName }: BarbershopServicesProps) {
   return (
     <>
       <div className="px-0 py-6">
@@ -26,9 +26,11 @@ export function BarbershopServices({ barbershop }: BarbershopServicesProps) {
 
         <div className="flex w-full flex-col gap-3">
           {barbershop.services.map((service) => (
-            <ServiceItem 
-              key={service.id} 
-              service={{ ...service, barbershop }} 
+            <ServiceItem
+              key={service.id}
+              logged={logged}
+              userName={userName}
+              service={{ ...service, barbershop }}
             />
           ))}
         </div>

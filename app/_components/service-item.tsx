@@ -9,7 +9,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "./ui/sheet";
 import { Calendar } from "./ui/calendar";
 import { Separator } from "./ui/separator";
@@ -28,7 +27,7 @@ interface ServiceItemProps {
   service: BarbershopService & {
     barbershop: Barbershop;
   }
-  logged: boolean;
+  logged?: boolean;
   userName?: string;
 }
 
