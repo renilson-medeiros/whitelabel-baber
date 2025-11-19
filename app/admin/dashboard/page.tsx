@@ -11,6 +11,7 @@ import {
   TrendingUp,
   DollarSign,
   CircleCheck,
+  LoaderCircle,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -82,8 +83,9 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-muted-foreground">Carregando...</p>
+      <div className="flex gap-2 h-screen items-center justify-center">
+        <LoaderCircle className="animate-spin text-blue-500" />
+        <p className="text-blue-500 ">Carregando...</p>
       </div>
     );
   }
@@ -94,7 +96,8 @@ export default function Dashboard() {
         {/* Header */}
         <header>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex justify-between items-center flex-1 w-full">
+
+            <div className="flex justify-between items-baseline-last flex-1 w-full sm:items-center">
               <h1 className="text-2xl font-bold">Dashboard</h1>
 
               <div className="flex gap-4">
@@ -110,6 +113,7 @@ export default function Dashboard() {
                   </p>
                 </Link>
               </div>
+
             </div>
 
             {/* Filter */}

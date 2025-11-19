@@ -8,26 +8,22 @@ interface ClientInfoModalProps {
   open: boolean;
   onClose: () => void;
   onConfirm: (name: string, phone: string) => void;
+
+  defaultName?: string;
 }
 
-export default function ClientInfoModal({ open, onClose, onConfirm }: ClientInfoModalProps) {
-  const [name, setName] = useState("");
+export default function ClientInfoModal({ open, onClose, onConfirm, defaultName }: ClientInfoModalProps) {
+  const [name, setName] = useState(defaultName ?? "");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState({ name: false, phone: false });
 
   if (!open) return null;
 
   const handlePhoneChange = (value: string) => {
-    // Remove o erro ao começar a digitar
     if (errors.phone) setErrors({ ...errors, phone: false });
-
-    // Remove tudo que não for número
     let cleaned = value.replace(/\D/g, "");
-
-    // Limita a 11 dígitos
     cleaned = cleaned.slice(0, 11);
 
-    // Aplica a máscara dinamicamente
     if (cleaned.length <= 2) {
       setPhone(`(${cleaned}`);
     } else if (cleaned.length <= 7) {
@@ -40,7 +36,6 @@ export default function ClientInfoModal({ open, onClose, onConfirm }: ClientInfo
   };
 
   const handleNameChange = (value: string) => {
-    // Remove o erro ao começar a digitar
     if (errors.name) setErrors({ ...errors, name: false });
     setName(value);
   };
@@ -73,7 +68,7 @@ export default function ClientInfoModal({ open, onClose, onConfirm }: ClientInfo
               type="text"
               placeholder="Nome"
               value={name}
-              onChange={(e) => handleNameChange(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               className={`w-full border py-5 rounded-full ${
                 errors.name 
                   ? "border-red-500 focus-visible:ring-red-500" 

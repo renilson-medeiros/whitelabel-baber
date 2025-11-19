@@ -24,7 +24,7 @@ const Header = () => {
       <div className="flex items-center gap-2">
 
         <Sheet>
-          <SheetTrigger asChild>
+          <SheetTrigger asChild id="menu-button">
             <Button variant="ghost" size="icon" className="cursor-pointer">
               <MenuIcon className="size-5" />
             </Button>

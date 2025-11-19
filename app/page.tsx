@@ -21,6 +21,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const Home = async () => {
+  
   const barbershop = await prisma.barbershop.findFirst({
     where: {
       id: process.env.DEFAULT_BARBERSHOP_ID, 
@@ -124,6 +125,8 @@ const Home = async () => {
               <ServiceItem
                 key={service.id}
                 service={{ ...service, barbershop }}
+                logged={!!session?.user}
+                userName={session?.user?.name ?? ""}
               />
             ))}
           </div>

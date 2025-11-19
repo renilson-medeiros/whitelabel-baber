@@ -27,10 +27,12 @@ import { startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
 interface ServiceItemProps {
   service: BarbershopService & {
     barbershop: Barbershop;
-  };
+  }
+  logged: boolean;
+  userName?: string;
 }
 
-export function ServiceItem({ service }: ServiceItemProps) {
+export function ServiceItem({ service, logged, userName }: ServiceItemProps) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState<string | undefined>();
   const { executeAsync, isPending } = useAction(createBooking);
@@ -133,11 +135,30 @@ export function ServiceItem({ service }: ServiceItemProps) {
               <p className="text-card-foreground text-sm leading-[1.4] font-bold whitespace-pre">
                 {priceInReais}
               </p>
-              <SheetTrigger asChild>
+
+              {/* <SheetTrigger asChild>
                 <Button className="rounded-full px-4 py-2 cursor-pointer" variant="default">
                   Reservar agora
                 </Button>
-              </SheetTrigger>
+              </SheetTrigger> */}
+
+              <Button
+                className="rounded-full px-4 py-2 cursor-pointer"
+                variant="default"
+                onClick={() => {
+                  if (!logged) {
+                    toast.error("Você precisa estar logado para fazer uma reserva.");
+
+                    document.getElementById("menu-button")?.click();
+
+                    return
+                  }
+                  setSheetIsOpen(true);
+                }}
+              >
+                Reservar agora
+              </Button>
+
             </div>
           </div>
         </div>
@@ -247,6 +268,9 @@ export function ServiceItem({ service }: ServiceItemProps) {
         <ClientInfoModal
           open={clientModalOpen}
           onClose={() => setClientModalOpen(false)}
+
+          defaultName={userName ?? ""} // Preencher com o nome do user logado
+
           onConfirm={async (name, phone) => {
             const [hours, minutes] = selectedTime!.split(":");
             const date = new Date(selectedDate!);
