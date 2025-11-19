@@ -19,6 +19,7 @@ import { PageContainer } from "@/app/_components/ui/page";
 import { useUploadThing } from "@/lib/uploadthing";
 import { toast } from "sonner";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Service {
   id: string;
@@ -205,7 +206,13 @@ export default function AdminServicesPage() {
         <PageContainer>
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <h1 className="text-2xl font-bold">Serviços</h1>
+              <div className="flex items-baseline-last flex-1 md:items-center-safe justify-between w-full">
+                <h1 className="text-2xl font-bold">Serviços</h1>
+
+                <Link href="/admin/panel">
+                  <p className="text-sm text-muted-foreground hover:underline">Acessar Agendamentos</p>
+                </Link>
+              </div>
 
               <Button
                 className="rounded-full cursor-pointer text-sm flex gap-2 items-center w-full sm:w-auto"
@@ -216,11 +223,11 @@ export default function AdminServicesPage() {
               </Button>
             </div>
 
-            <ul className="space-y-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
               {services.map((s) => (
                 <li
                   key={s.id}
-                  className="flex flex-col justify-between border rounded-lg p-4"
+                  className="flex flex-col justify-between bg-card border border-border rounded-xl p-4"
                 >
                   <div className="flex flex-col sm:flex-row items-start gap-4 relative">
                     <div className="relative w-full sm:w-24 h-48 sm:h-24 rounded-md overflow-hidden border">
@@ -245,23 +252,23 @@ export default function AdminServicesPage() {
                       </p>
                     </div>
 
-                    <div className="flex sm:flex-col gap-2 w-full sm:w-auto mt-4 sm:mt-0">
+                    <div className="flex sm:flex-col gap-2 w-full sm:h-full sm:w-auto mt-4 sm:mt-0 sm:justify-between">
                       <Button
-                        className="cursor-pointer flex-1 sm:flex-none rounded-full"
-                        variant="outline"
+                        className="cursor-pointer flex-1 sm:flex-none rounded-full w-10 h-10"
+                        variant="default"
                         onClick={() => handleEdit(s)}
                       >
-                        <Pencil className="w-4 h-4 sm:mr-0" />
-                        <span className="sm:hidden ml-2">Editar</span>
+                        <Pencil className="sm:mr-0" />
+                        <span className="sm:hidden">Editar</span>
                       </Button>
 
                       <Button
-                        className="cursor-pointer flex-1 sm:flex-none rounded-full"
+                        className="cursor-pointer flex-1 sm:flex-none rounded-full w-10 h-10"
                         variant="destructive"
                         onClick={() => handleDeleteRequest(s.id)}
                       >
-                        <Trash2 className="w-4 h-4 sm:mr-0" />
-                        <span className="sm:hidden ml-2">Excluir</span>
+                        <Trash2 className="sm:mr-0" />
+                        <span className="sm:hidden">Excluir</span>
                       </Button>
                     </div>
                   </div>

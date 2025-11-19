@@ -19,6 +19,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/app/_components/ui/alert-dialog";
+import Link from "next/link";
 
 interface Booking {
   id: string;
@@ -108,7 +109,16 @@ export default function AdminPanel() {
     <main className="flex h-screen min-h-screen flex-col">
       <PageContainer>
         <div className="flex-1 mx-auto space-y-6">
-          <h1 className="text-2xl font-bold">Agendamentos do dia</h1>
+          
+          <div className="flex justify-between items-baseline-last flex-1 w-full">
+            <h1 className="text-2xl font-bold">Agendamentos</h1>
+
+            <Link href="/admin/services">
+              <p className="text-sm text-muted-foreground hover:underline">
+                Gerenciar Serviços
+              </p>
+            </Link>
+          </div>
 
           <div className="flex justify-between items-center">
             <Button

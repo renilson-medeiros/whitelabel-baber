@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -32,7 +34,13 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+    <div className="flex flex-col gap-8 min-h-screen items-center justify-center bg-gray-50">
+      <div>
+        <Link href="/">
+          <Image src="/logo.svg" alt="Barber" width={219} height={30} />
+        </Link>
+      </div>
+
       <div className="flex flex-col gap-4 w-full max-w-sm p-6 bg-white rounded-xl shadow">
         <h1 className="text-2xl font-bold mb-4">Login admin</h1>
 
