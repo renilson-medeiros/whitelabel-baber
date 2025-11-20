@@ -26,7 +26,7 @@ const QuickSearchButtons = () => {
             flex shrink-0 items-center justify-center gap-3 rounded-3xl border px-4 py-2
             border-border bg-card text-card-foreground text-sm font-medium
             cursor-pointer transition-colors duration-200
-            hover:bg-black/10 hover:text-accent-foreground
+            hover:bg-foreground/10 hover:text-accent-foreground hover:border-accent
           "
         >
           <Icon className="size-4" />

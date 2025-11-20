@@ -34,7 +34,7 @@ const CategoryItem = ({ label, search }: { label: string; search: string }) => (
         w-full justify-start rounded-full px-5 py-3 h-10 
         text-sm font-medium cursor-pointer
         transition-colors duration-200
-        hover:bg-black/10 hover:text-accent-foreground
+        hover:bg-foreground/10 hover:text-accent-foreground
       "
     >
       {label}

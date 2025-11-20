@@ -58,7 +58,7 @@ export default function ClientInfoModal({ open, onClose, onConfirm, defaultName 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/50">
       <div className="bg-white rounded-2xl p-6 w-[90%] max-w-sm shadow-xl flex flex-col gap-4">
         <h2 className="text-lg font-bold">Seu contato</h2>
 
@@ -72,7 +72,7 @@ export default function ClientInfoModal({ open, onClose, onConfirm, defaultName 
               className={`w-full border py-5 rounded-full ${
                 errors.name 
                   ? "border-red-500 focus-visible:ring-red-500" 
-                  : "border-black/10"
+                  : "border-foreground/10"
               }`}
             />
             {errors.name && (
@@ -89,7 +89,7 @@ export default function ClientInfoModal({ open, onClose, onConfirm, defaultName 
               className={`w-full border py-5 rounded-full ${
                 errors.phone 
                   ? "border-red-500 focus-visible:ring-red-500" 
-                  : "border-black/10"
+                  : "border-foreground/10"
               }`}
               maxLength={15}
             />
@@ -106,7 +106,7 @@ export default function ClientInfoModal({ open, onClose, onConfirm, defaultName 
         <div className="flex flex-col gap-3 mt-2">
           <Button
             onClick={handleConfirm}
-            className="flex-1 bg-black text-white py-2 rounded-full cursor-pointer"
+            className="flex-1 bg-foreground text-white py-2 rounded-full cursor-pointer"
           >
             Confirmar
           </Button>

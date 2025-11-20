@@ -318,7 +318,7 @@ export default function AdminServicesPage() {
               <Label htmlFor="name">Serviço</Label>
               <Input
                 id="name"
-                className="border-black/10 py-5"
+                className="border-foreground/10 py-5"
                 value={form.name}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, name: e.target.value }))
@@ -331,7 +331,7 @@ export default function AdminServicesPage() {
               <Textarea
                 id="description"
                 rows={3}
-                className="border-black/10 py-3"
+                className="border-foreground/10 py-3"
                 value={form.description}
                 onChange={(e) =>
                   setForm((f) => ({ ...f, description: e.target.value }))
@@ -387,7 +387,7 @@ export default function AdminServicesPage() {
               <Input
                 id="priceInCents"
                 type="number"
-                className="border-black/10 py-5"
+                className="border-foreground/10 py-5"
                 value={form.priceInCents}
                 onChange={(e) =>
                   setForm((f) => ({
