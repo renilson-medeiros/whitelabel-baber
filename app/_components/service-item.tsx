@@ -22,6 +22,7 @@ import { getDateAvailableTimeSlots } from "../_actions/get-date-available-time-s
 import ClientInfoModal from "./client-info-modal";
 import { toast } from "sonner";
 import { startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
+import { PageSectionScroller } from "./ui/page";
 
 interface ServiceItemProps {
   service: BarbershopService & {
@@ -201,20 +202,29 @@ export function ServiceItem({ service, logged, userName }: ServiceItemProps) {
             <>
               <Separator />
 
-              <div className="flex items-center gap-3 overflow-x-auto px-5 py-6 [&::-webkit-scrollbar]:hidden md:flex-wrap">
+              <div className="px-5 py-2">
                 {filteredTimeSlots.length > 0 ? (
-                  filteredTimeSlots.map((time) => (
-                    <Button
-                      key={time}
-                      variant={selectedTime === time ? "default" : "outline"}
-                      className="shrink-0 rounded-full cursor-pointer"
-                      onClick={() => setSelectedTime(time)}
-                    >
-                      {time}
-                    </Button>
-                  ))
+                  <PageSectionScroller>
+                  <div className="max-h-[100px] overflow-y-auto space-y-2 pr-2 [&::-webkit-scrollbar]:hidden">
+                    {filteredTimeSlots.map((time) => (
+                      <button
+                        key={time}
+                        onClick={() => setSelectedTime(time)}
+                        className={`
+                          w-full py-2 px-4 rounded-full border text-center transition-all cursor-pointer
+                          ${selectedTime === time 
+                            ? 'border-primary bg-foreground text-primary-foreground font-medium' 
+                            : 'border-border bg-card hover:bg-foreground/10'
+                          }
+                        `}
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+                  </PageSectionScroller>
                 ) : (
-                  <p className="w-full text-muted-foreground text-center text-sm">
+                  <p className="text-muted-foreground text-center text-sm py-8">
                     Todos os horários já foram reservados.
                   </p>
                 )}
